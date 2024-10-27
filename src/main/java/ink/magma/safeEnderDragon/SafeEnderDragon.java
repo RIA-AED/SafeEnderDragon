@@ -12,7 +12,14 @@ import java.util.List;
 
 public final class SafeEnderDragon extends JavaPlugin implements Listener {
 
-    private final List<EntityType> EnderDragonCanAttack = List.of(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL, EntityType.ENDERMITE, EntityType.ENDERMAN, EntityType.WITHER);
+    private final List<EntityType> EnderDragonCannotAttack = List.of(
+            EntityType.ENDER_DRAGON,
+            EntityType.ENDER_CRYSTAL,
+            EntityType.ENDERMITE,
+            EntityType.ENDERMAN,
+            EntityType.WITHER,
+            EntityType.PLAYER
+    );
 
     @Override
     public void onEnable() {
@@ -38,7 +45,7 @@ public final class SafeEnderDragon extends JavaPlugin implements Listener {
 //        getLogger().info("onEnderDragonDamageEntity event.getDamager().getType(): " + event.getDamager().getType());
         if (event.getDamager().getType().equals(EntityType.ENDER_DRAGON)) {
             getLogger().info("onEnderDragonDamageEntity event.getEntityType(): " + event.getEntityType());
-            if (!EnderDragonCanAttack.contains(event.getEntityType())) event.setCancelled(true);
+            if (!EnderDragonCannotAttack.contains(event.getEntityType())) event.setCancelled(true);
         }
     }
 }
